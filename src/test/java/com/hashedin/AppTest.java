@@ -1,5 +1,8 @@
 package com.hashedin;
 
+import java.io.IOException;
+import java.util.Map;
+
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -30,9 +33,13 @@ public class AppTest
 
     /**
      * Rigourous Test :-)
+     * @throws IOException 
      */
-    public void testApp()
-    {
+    public void testApp() throws IOException
+    
+    {movieManager m = new movieManager();
+	Map<String, Movie> movieMap = m.getMovies(m.getClass().getClassLoader().getResourceAsStream("test_movie.txt"));
+
         assertTrue( true );
     }
 }
