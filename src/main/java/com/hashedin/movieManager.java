@@ -41,7 +41,7 @@ public class movieManager {
 		return (m);
 	}
 
-	public List< Map> getRating(InputStream ratingStream)
+	public List< Map> getRating(InputStream ratingStream)//reading rate file
 			throws IOException {
 
 		Map<String, Rating> movieRatingMap = new HashMap<>();
@@ -95,6 +95,7 @@ public class movieManager {
 	}
 
 	public Map<String, User> getUser(InputStream userStream) throws IOException {
+		
 
 		Map<String, User> movieUserMap = new HashMap<>();
 		List<String> lines = IOUtils.readLines(userStream);
@@ -135,6 +136,7 @@ public class movieManager {
 	}
 
 	Gerne parseGerneUser(String gerneRecord) {
+		// parsing each line of file
 		StringTokenizer token = new StringTokenizer(gerneRecord, "|");
 		Gerne g = new Gerne();
 		g.setGenre(token.nextToken());
@@ -161,7 +163,7 @@ public class movieManager {
 		
 }					
 
-	Rater parseRate(String movieRecord) {
+	Rater parseRate(String movieRecord) { // parsing each line of file
 			StringTokenizer token = new StringTokenizer(movieRecord, "	");
 			Rater rate = new Rater();
 			rate.setUserIds(Integer.parseInt(token.nextToken()));

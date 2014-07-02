@@ -12,9 +12,9 @@ import java.util.StringTokenizer;
 import org.apache.commons.io.IOUtils;
 
 public class MovieFrick {
-	public void mostWatched(List<Map> list,Map<String, Movie> movieMap){
+	public void mostWatched(List<Map> list,Map<String, Movie> movieMap){ 
 		
-		
+		// function is calculating most watched movie
 
 			
 			
@@ -66,6 +66,8 @@ public class MovieFrick {
 			
 		}
 	public void mostActiveUser(List<Map> list){
+		
+		// function is calculating most Active User
 		
 		List<Object> list1 = new ArrayList<>();
 		for (int i = 0; i <list.size(); i++) {
@@ -124,6 +126,9 @@ public class MovieFrick {
 
 	public Movie highestRatedGenre(Map<String, Movie> movieMap,
 			ArrayList<Rater> rateMap, Map<String, User> usrMap) {
+		
+		
+		// function is calculating highest rated movie
 		
 		List<Movie> movieList = new ArrayList<Movie>(movieMap.values());
 		List<User> userList = new ArrayList<User>(usrMap.values());
