@@ -110,6 +110,13 @@ public class MovieFrick {
 	
 	public void topMovieByGerne(ArrayList<Gerne> movieGerneMap , String s){
 		
+		for(int i=0;i<movieGerneMap.size();i++){
+			
+			
+			System.out.println(movieGerneMap.get(i));
+		}
+			
+		
 		
 	}
 

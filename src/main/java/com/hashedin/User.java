@@ -7,6 +7,7 @@ public class User {
 		private String gender;
 		private String occupation;
 		private String zipcode;
+		
 		public int getUserId() {
 			return userId;
 		}

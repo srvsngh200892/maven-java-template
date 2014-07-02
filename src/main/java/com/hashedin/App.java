@@ -30,9 +30,28 @@ public class App
 				.getClassLoader().getResourceAsStream("user.data"));
 		ArrayList<Gerne> movieGerneMap = r.getGerne(r.getClass()
 				.getClassLoader().getResourceAsStream("genre.data"));
+		ArrayList<Rater>rateMap=r.getRater(r.getClass()
+				.getClassLoader().getResourceAsStream("ratings.data"));
 		M.mostWatched(list,movieMap);
 		M.mostActiveUser(list);
 		M.topMovieByGerne(movieGerneMap,s);
+		//System.out.println(movieMap);
+		 for(Rater ratingObj :rateMap ) {
+			   Movie movieObj = movieMap.get(ratingObj.getItemIds());
+			   
+			   movieObj.setTotalRating(ratingObj.getRatings());
+		 // System.out.println(movieObj.getTotalUserCount());
+		 // System.out.println(movieObj.getTotalRatings());
+			// System.out.println(movieObj);
+			 User userObj = movieUserMap.get(ratingObj.getUserIds());
+			
+			// System.out.println(userObj);
+			 }
+			 
+			// System.out.println("--------------------------------");
+			
+			
+
 	}
 	
 }

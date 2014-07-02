@@ -36,6 +36,55 @@ public class movieManager {
 		m.setTitle(token.nextToken());
 		m.setReleaseDate(token.nextToken());
 		m.setImdbUrl(token.nextToken());
+		Integer count=0;
+		ArrayList<String>gener =new ArrayList<String>();
+		while(token.hasMoreElements())
+		{
+			int tempGenre = Integer.parseInt(token.nextToken());
+			if(tempGenre ==1 && count<19){
+				switch(count) {
+				case 1 :  gener.add("unknown");
+					   	  break;
+				case 2 :  gener.add("Action");
+			   	  break;
+				case 3 :  gener.add("Adventure");
+			   	  break;
+				case 4 :  gener.add("Animation");
+			   	  break;
+				case 5 :  gener.add("Children's");
+			   	  break;
+				case 6 :  gener.add("Comedy");
+			   	  break;
+				case 7:  gener.add("Crime");
+			   	  break;
+				case 8 :  gener.add("drama");
+			   	  break;
+			   	  case 9 :  gener.add("fantasy");
+			   	  break;
+			   	case 10 :  gener.add("film-noir");
+			   	  break;
+			   	case 11 :  gener.add("horror");
+			   	  break;
+			   	case 12 :  gener.add("musical");
+			   	  break;
+			   	case 13 :  gener.add("romance");
+			   	  break;
+			   	case 14 :  gener.add("sci-fi");
+			   	  break;
+			   	case 15 :  gener.add("thriller");
+			   	  break;
+			   	case 16 :  gener.add("war");
+			   	  break;
+			   	case 17 :  gener.add("western");
+			   	  break;
+			   	case 18 :  gener.add("unknown");
+			   	  break;
+			   	  default :
+				}
+			}
+			count++;
+		}
+		
 		return (m);
 	}
 
@@ -126,7 +175,7 @@ public class movieManager {
 		for (String line : lines) {
 			Gerne g = parseGerneUser(line);
 			movieGerneMap.add(g);
-			System.out.println(g);
+			//System.out.println(g);
 		}
 
 		return movieGerneMap;
@@ -142,6 +191,35 @@ public class movieManager {
 	}
 	
 	
+	public ArrayList<Rater> getRater(InputStream movieStream)
+			throws IOException {
+
+		ArrayList<Rater> rateMap = new ArrayList<Rater>();
+		List <String> lines = IOUtils.readLines(movieStream);
+
+		for (String line : lines) {
+			Rater rate = parseRate(line);
+			rateMap.add(rate);
+			System.out.println(rate);
+		}
+		
+		//System.out.println(rateMap.get(1));
+		return rateMap;
+		
+}					
+
+	Rater parseRate(String movieRecord) {
+			StringTokenizer token = new StringTokenizer(movieRecord, "	");
+			Rater rate = new Rater();
+			rate.setUserIds(Integer.parseInt(token.nextToken()));
+			rate.setItemIds(Integer.parseInt(token.nextToken()));
+			rate.setRatings(Integer.parseInt(token.nextToken()));
+			rate.setTimestamps(Integer.parseInt(token.nextToken()));
+			return (rate);
+
+			
+		}
+			
 
 	
 
