@@ -1,6 +1,8 @@
 package com.hashedin;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
@@ -113,14 +115,51 @@ public class MovieFrick {
 		for(int i=0;i<movieGerneMap.size();i++){
 			
 			
-			System.out.println(movieGerneMap.get(i));
+			//System.out.println(movieGerneMap.get(i));
 		}
 			
 		
 		
 	}
 
+	public Movie highestRatedGenre(Map<String, Movie> movieMap,
+			ArrayList<Rater> rateMap, Map<String, User> usrMap) {
+		
+		List<Movie> movieList = new ArrayList<Movie>(movieMap.values());
+		List<User> userList = new ArrayList<User>(usrMap.values());
+		//System.out.println(movieList);
+		for (Movie m : movieList ){
+			float avg = findAverage(m.getTotalRating(),m.getTotalusercount());
+				m.setAverageRating(avg);
+				//System.out.println(m.getAvg());
+				}
+		   
+	    Movie highestRated = Collections.max(movieList, new Comparator<Movie>() {
+		        @Override
+		        public int compare(Movie first,Movie second) {
+		            if (first.getAverageRating() > second.getAverageRating())
+		                return 1;
+		            else if (first.getAverageRating() < second.getAverageRating())
+		                return -1;
+		            return 0;
+		        }
+		    });
+	    	//System.out.println(highestRated.getAvg());
+			return highestRated; 
 
 
+
+				
+		
+	}
+
+
+	public float findAverage(int totalRatings, int totalUserCount) {
+		
+		  return (float)totalRatings/(float)totalUserCount;
+		
+	}
 
 }
+
+

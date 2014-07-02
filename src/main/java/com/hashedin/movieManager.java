@@ -15,11 +15,11 @@ import org.apache.commons.io.IOUtils;
 
 public class movieManager {
 
-	public Map<String, Movie> getMovies(InputStream movieStream)
+	public Map<String, Movie> getMovies(InputStream movieStream)  //getting the movie.data files data
 			throws IOException {
 
 		Map<String, Movie> movieMap = new HashMap<>();
-		List<String> lines = IOUtils.readLines(movieStream);
+		List<String> lines = IOUtils.readLines(movieStream); // reading it line by line
 
 		for (String line : lines) {
 			Movie m = parseMovie(line);
@@ -30,60 +30,13 @@ public class movieManager {
 	}
 
 	Movie parseMovie(String movieRecord) {
-		StringTokenizer token = new StringTokenizer(movieRecord, "|");
+		StringTokenizer token = new StringTokenizer(movieRecord, "|");//spliting by |
 		Movie m = new Movie();
 		m.setId(Integer.parseInt(token.nextToken()));
 		m.setTitle(token.nextToken());
 		m.setReleaseDate(token.nextToken());
 		m.setImdbUrl(token.nextToken());
-		Integer count=0;
-		ArrayList<String>gener =new ArrayList<String>();
-		while(token.hasMoreElements())
-		{
-			int tempGenre = Integer.parseInt(token.nextToken());
-			if(tempGenre ==1 && count<19){
-				switch(count) {
-				case 1 :  gener.add("unknown");
-					   	  break;
-				case 2 :  gener.add("Action");
-			   	  break;
-				case 3 :  gener.add("Adventure");
-			   	  break;
-				case 4 :  gener.add("Animation");
-			   	  break;
-				case 5 :  gener.add("Children's");
-			   	  break;
-				case 6 :  gener.add("Comedy");
-			   	  break;
-				case 7:  gener.add("Crime");
-			   	  break;
-				case 8 :  gener.add("drama");
-			   	  break;
-			   	  case 9 :  gener.add("fantasy");
-			   	  break;
-			   	case 10 :  gener.add("film-noir");
-			   	  break;
-			   	case 11 :  gener.add("horror");
-			   	  break;
-			   	case 12 :  gener.add("musical");
-			   	  break;
-			   	case 13 :  gener.add("romance");
-			   	  break;
-			   	case 14 :  gener.add("sci-fi");
-			   	  break;
-			   	case 15 :  gener.add("thriller");
-			   	  break;
-			   	case 16 :  gener.add("war");
-			   	  break;
-			   	case 17 :  gener.add("western");
-			   	  break;
-			   	case 18 :  gener.add("unknown");
-			   	  break;
-			   	  default :
-				}
-			}
-			count++;
-		}
+		
 		
 		return (m);
 	}
@@ -200,7 +153,7 @@ public class movieManager {
 		for (String line : lines) {
 			Rater rate = parseRate(line);
 			rateMap.add(rate);
-			System.out.println(rate);
+			//System.out.println(rate);
 		}
 		
 		//System.out.println(rateMap.get(1));

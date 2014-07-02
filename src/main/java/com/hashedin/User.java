@@ -1,5 +1,5 @@
 package com.hashedin;
-
+//Contain user.data Field
 public class User {
 
 	private int userId;

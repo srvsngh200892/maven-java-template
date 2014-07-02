@@ -11,47 +11,50 @@ import java.util.Map;
  * Hello world!
  *
  */
-public class App 
-{
+public class App {
 	public static void main(String[] args) throws IOException {
-		System.out.println("Most Axtive User Id ");
-		BufferedReader br = new BufferedReader( new InputStreamReader(System.in));
-		String s = br.readLine();
-	
-		
-		movieManager m = new movieManager();
-		movieManager r = new movieManager();
-		MovieFrick M = new MovieFrick();
-		Map<String, Movie> movieMap = m.getMovies(m.getClass().getClassLoader()
-				.getResourceAsStream("movie.data"));
-		List<Map> list = r.getRating(r.getClass()
-				.getClassLoader().getResourceAsStream("ratings.data"));
-		Map<String, User> movieUserMap = r.getUser(r.getClass()
-				.getClassLoader().getResourceAsStream("user.data"));
-		ArrayList<Gerne> movieGerneMap = r.getGerne(r.getClass()
-				.getClassLoader().getResourceAsStream("genre.data"));
-		ArrayList<Rater>rateMap=r.getRater(r.getClass()
-				.getClassLoader().getResourceAsStream("ratings.data"));
-		M.mostWatched(list,movieMap);
-		M.mostActiveUser(list);
-		M.topMovieByGerne(movieGerneMap,s);
-		//System.out.println(movieMap);
-		 for(Rater ratingObj :rateMap ) {
-			   Movie movieObj = movieMap.get(ratingObj.getItemIds());
-			   
-			   movieObj.setTotalRating(ratingObj.getRatings());
-		 // System.out.println(movieObj.getTotalUserCount());
-		 // System.out.println(movieObj.getTotalRatings());
-			// System.out.println(movieObj);
-			 User userObj = movieUserMap.get(ratingObj.getUserIds());
-			
-			// System.out.println(userObj);
-			 }
-			 
-			// System.out.println("--------------------------------");
-			
-			
+		//System.out.println("Most Axtive User Id ");
+		//BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		//String s = br.readLine();
 
+		movieManager movie = new movieManager();
+
+		MovieFrick moviefreaker = new MovieFrick();
+		Map<String, Movie> movieMap = movie.getMovies(movie.getClass()
+				.getClassLoader().getResourceAsStream("movie.data"));// reading
+																		// and
+																		// creating
+																		// data
+		List<Map> list = movie.getRating(movie.getClass().getClassLoader()
+				.getResourceAsStream("ratings.data"));
+		Map<String, User> movieUserMap = movie.getUser(movie.getClass()
+				.getClassLoader().getResourceAsStream("user.data"));
+		ArrayList<Gerne> movieGerneMap = movie.getGerne(movie.getClass()
+				.getClassLoader().getResourceAsStream("genre.data"));
+		ArrayList<Rater> rateMap = movie.getRater(movie.getClass()
+				.getClassLoader().getResourceAsStream("ratings.data"));
+		moviefreaker.mostWatched(list, movieMap); // function for calculating
+													// most watched movie
+		moviefreaker.mostActiveUser(list); // function for calculating most
+											// Active User
+		//moviefreaker.topMovieByGerne(movieGerneMap, s);// //function top movie
+														// By Garner
+		// System.out.println(movieMap);
+
+		for (Rater ratingObj : rateMap) {
+			Movie movieObj = movieMap.get(Integer.toString(ratingObj
+					.getItemIds()));
+
+			movieObj.setTotalRating(ratingObj.getRatings());
+
+			User userObj = movieUserMap.get(ratingObj.getUserIds() );
+
+		}
+
+		// System.out.println("--------------------------------");
+		Movie mostwatched = moviefreaker.highestRatedGenre(movieMap, rateMap,
+				movieUserMap); // top rated movie
+		System.out.println(mostwatched.getAverageRating());
 	}
-	
+
 }
