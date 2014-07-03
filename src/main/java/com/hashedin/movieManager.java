@@ -15,87 +15,81 @@ import org.apache.commons.io.IOUtils;
 
 public class movieManager {
 
-	public Map<String, Movie> getMovies(InputStream movieStream)  //getting the movie.data files data
+	public Map<String, Movie> getMovies(InputStream movieStream) // getting the
+																	// movie.data
+																	// files
+																	// data
 			throws IOException {
 
 		Map<String, Movie> movieMap = new HashMap<>();
-		List<String> lines = IOUtils.readLines(movieStream); // reading it line by line
+		List<String> lines = IOUtils.readLines(movieStream); // reading it line
+																// by line
 
 		for (String line : lines) {
 			Movie m = parseMovie(line);
 			movieMap.put(Integer.toString(m.getId()), m);
-			//System.out.println(m);
+			// System.out.println(m);
 		}
 		return movieMap;
 	}
 
 	Movie parseMovie(String movieRecord) {
-		StringTokenizer token = new StringTokenizer(movieRecord, "|");//spliting by |
+		StringTokenizer token = new StringTokenizer(movieRecord, "|");// spliting
+																		// by |
 		Movie m = new Movie();
 		m.setId(Integer.parseInt(token.nextToken()));
 		m.setTitle(token.nextToken());
 		m.setReleaseDate(token.nextToken());
 		m.setImdbUrl(token.nextToken());
-		
-		
+
 		return (m);
 	}
 
-	public List< Map> getRating(InputStream ratingStream)//reading rate file
+	public List<Map> getRating(InputStream ratingStream)// reading rate file
 			throws IOException {
 
 		Map<String, Rating> movieRatingMap = new HashMap<>();
 		List<String> lines = IOUtils.readLines(ratingStream);
 		List<Map> list = new ArrayList<>();
 		for (String line : lines) {
-			
-			StringTokenizer token = new StringTokenizer(line, "\t");
-			
-		  
-			Map<String,String> mMap = new HashMap<>();
-			
-			
-			mMap.put("start",token.nextToken());
-			
-			mMap.put("itemid",token.nextToken());
-			mMap.put("rating",token.nextToken());
-			mMap.put("tamptimest",token.nextToken());
-			list.add(mMap);
-			
-			
-			
-		}
-	
 
-		    //System.out.println("Most Watched "+maxKey1); 
-		
-		//System.out.println(frequencyHash2);
+			StringTokenizer token = new StringTokenizer(line, "\t");
+
+			Map<String, String> mMap = new HashMap<>();
+
+			mMap.put("start", token.nextToken());
+
+			mMap.put("itemid", token.nextToken());
+			mMap.put("rating", token.nextToken());
+			mMap.put("tamptimest", token.nextToken());
+			list.add(mMap);
+
+		}
+
+		// System.out.println("Most Watched "+maxKey1);
+
+		// System.out.println(frequencyHash2);
 		return list;
 	}
 
 	List<Map> parseMovierating(String ratingRecord) {
 		StringTokenizer token = new StringTokenizer(ratingRecord, "\t");
 		Rating r = new Rating();
-	  
-		Map<String,String> mMap = new HashMap<>();
+
+		Map<String, String> mMap = new HashMap<>();
 		List<Map> list = new ArrayList<>();
-		
-		mMap.put("start",token.nextToken());
-		
-		mMap.put("itemid",token.nextToken());
-		mMap.put("rating",token.nextToken());
-		mMap.put("tamptimest",token.nextToken());
+
+		mMap.put("start", token.nextToken());
+
+		mMap.put("itemid", token.nextToken());
+		mMap.put("rating", token.nextToken());
+		mMap.put("tamptimest", token.nextToken());
 		list.add(mMap);
 
-		
-		
-		
-		
 		return (list);
 	}
 
 	public Map<String, User> getUser(InputStream userStream) throws IOException {
-		
 
 		Map<String, User> movieUserMap = new HashMap<>();
 		List<String> lines = IOUtils.readLines(userStream);
@@ -103,7 +97,7 @@ public class movieManager {
 		for (String line : lines) {
 			User u = parseMovieUser(line);
 			movieUserMap.put(Integer.toString(u.getUserId()), u);
-			//System.out.println(u);
+			// System.out.println(u);
 		}
 		return movieUserMap;
 	}
@@ -129,7 +123,7 @@ public class movieManager {
 		for (String line : lines) {
 			Gerne g = parseGerneUser(line);
 			movieGerneMap.add(g);
-			//System.out.println(g);
+			// System.out.println(g);
 		}
 
 		return movieGerneMap;
@@ -144,38 +138,33 @@ public class movieManager {
 
 		return (g);
 	}
-	
-	
+
 	public ArrayList<Rater> getRater(InputStream movieStream)
 			throws IOException {
 
 		ArrayList<Rater> rateMap = new ArrayList<Rater>();
-		List <String> lines = IOUtils.readLines(movieStream);
+		List<String> lines = IOUtils.readLines(movieStream);
 
 		for (String line : lines) {
 			Rater rate = parseRate(line);
 			rateMap.add(rate);
-			//System.out.println(rate);
+			// System.out.println(rate);
 		}
-		
-		//System.out.println(rateMap.get(1));
+
+		// System.out.println(rateMap.get(1));
 		return rateMap;
-		
-}					
+
+	}
 
 	Rater parseRate(String movieRecord) { // parsing each line of file
-			StringTokenizer token = new StringTokenizer(movieRecord, "	");
-			Rater rate = new Rater();
-			rate.setUserIds(Integer.parseInt(token.nextToken()));
-			rate.setItemIds(Integer.parseInt(token.nextToken()));
-			rate.setRatings(Integer.parseInt(token.nextToken()));
-			rate.setTimestamps(Integer.parseInt(token.nextToken()));
-			return (rate);
+		StringTokenizer token = new StringTokenizer(movieRecord, "	");
+		Rater rate = new Rater();
+		rate.setUserIds(Integer.parseInt(token.nextToken()));
+		rate.setItemIds(Integer.parseInt(token.nextToken()));
+		rate.setRatings(Integer.parseInt(token.nextToken()));
+		rate.setTimestamps(Integer.parseInt(token.nextToken()));
+		return (rate);
 
-			
-		}
-			
-
-	
+	}
 
 }

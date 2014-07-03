@@ -44,17 +44,28 @@ public class App {
 		for (Rater ratingObj : rateMap) {
 			Movie movieObj = movieMap.get(Integer.toString(ratingObj
 					.getItemIds()));
+			   movieObj.setTotalusercount(1);
+
 
 			movieObj.setTotalRating(ratingObj.getRatings());
 
 			User userObj = movieUserMap.get(ratingObj.getUserIds() );
 
 		}
-
-		// System.out.println("--------------------------------");
+       
+		
+		
 		Movie mostwatched = moviefreaker.highestRatedGenre(movieMap, rateMap,
 				movieUserMap); // top rated movie
-		System.out.println(mostwatched.getAverageRating());
+		System.out.println("Most Watched Movie");
+		System.out.println(mostwatched.getTitle());
+		System.out.println("Enter the year to see top most movie by year");
+		 BufferedReader inp = new BufferedReader (new InputStreamReader(System.in));
+		    String T=inp.readLine();
+		int movieId=moviefreaker.topMovieByYear(movieMap,T);
+		
+		System.out.println("Most Rated Movie");
+		System.out.println(movieMap.get(Integer.toString(movieId)).getTitle());
 	}
 
 }

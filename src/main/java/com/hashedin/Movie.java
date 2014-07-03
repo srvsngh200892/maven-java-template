@@ -75,7 +75,7 @@ public class Movie {
 	}
 
 	public void setTotalusercount(int totalusercount) {
-		this.totalusercount = totalusercount;
+		this.totalusercount += totalusercount;
 	}
 
 	@Override
